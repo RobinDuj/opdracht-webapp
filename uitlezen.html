@@ -6,7 +6,7 @@
     <script src="scripts/script.js"></script>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="manifest" href="manifest.json">
-    <title>NFC app</title>
+    <title>lezen</title>
 </head>
 <body>
     <nav>
@@ -18,17 +18,10 @@
         </div>
     </nav>
     <div class="container">
-        <div class="content">
-            <div class="content__left">
-                <h2>Read NFC</h2>
-                <button id="read" onclick="readNFC()">Read NFC</button>
-                <div id="nfc-data"></div>
-            </div>
-            <div class="content__right">
-                <h2>Write NFC</h2>
-                <input type="text" id="nfc-input" placeholder="Enter text to write">
-                <button id="write" onclick="writeNFC()">Write NFC</button>
-            </div>
+        <div class="content__left">
+            <h2>Read NFC</h2>
+            <button id="read" onclick="readNFC()">Read NFC</button>
+            <div id="nfc-data"></div>
         </div>
     </div>
 </body>

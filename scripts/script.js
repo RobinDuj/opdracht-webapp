@@ -1,3 +1,8 @@
+window.addEventListener('load', function(){
+    console.log("Loaded.");
+    
+});
+
 async function readNFC() {
     if (!("NDEFReader" in window)) {
         alert("Web NFC API is not supported in this browser.");

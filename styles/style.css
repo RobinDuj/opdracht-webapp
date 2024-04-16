@@ -1,0 +1,66 @@
+:root{
+    --defaultFontSize: 16px;
+    --defaultMargin: 20px;
+    --logoHeight: 48px;
+    --defaultRadius: 4px;
+    --defaultShadow: 2px;
+
+    --vivesRed: #e00020;
+    --vivesOffWhite: #efeee9;
+    --vivesDark: #1e1e1e;
+
+    --vivesFont: Poppins,Helvetica,Arial,sans-serif;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0 auto;
+
+    padding: var(--defaultMargin);
+    font-family: var(--vivesFont);
+
+    color: var(--vivesDark);
+    font-size: var(--defaultFontSize);
+    min-width: 350px;
+    max-width: 1600px;
+
+    position: relative;
+}
+
+header{
+    display: grid;
+    grid-template-columns: auto var(--logoHeight);
+    padding-bottom: calc(var(--defaultMargin) / 2);
+    border-bottom: calc(var(--defaultRadius) / 2) solid var(--vivesOffWhite);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+}
+
+nav h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+#linkWrapper {
+    display: flex;
+}
+
+#linkWrapper a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+#linkWrapper a:first-child {
+    margin-left: 0;
+}
