@@ -64,3 +64,14 @@ nav h1 {
 #linkWrapper a:first-child {
     margin-left: 0;
 }
+
+footer{
+    font-size: 0.7em;
+    color: #fff;
+    position: fixed;
+    bottom: 0px;
+    width: 98%;
+    text-align: center;
+    background-color: #333;
+    line-height: 2em;
+}
