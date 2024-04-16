@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="scripts/script.js"></script>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="manifest" href="manifest.json">
+    <title>NFC app</title>
+</head>
+<body>
+    <nav>
+        <h1>NFC app</h1>
+        <div id="linkWrapper">
+            <a href="#">home</a>
+            <a href="#">NFC lezen</a>
+            <a href="#">NFC schrijven</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="content">
+            <div class="content__left">
+                <h2>Read NFC</h2>
+                <button id="read" onclick="readNFC()">Read NFC</button>
+                <div id="nfc-data"></div>
+            </div>
+            <div class="content__right">
+                <h2>Write NFC</h2>
+                <input type="text" id="nfc-input" placeholder="Enter text to write">
+                <button id="write" onclick="writeNFC()">Write NFC</button>
+            </div>
+        </div>
+    </div>
+</body>
+<footer>
+    <p>&copy;Robin</p>
+</footer>
+</html>
