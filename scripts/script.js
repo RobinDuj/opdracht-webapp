@@ -1,6 +1,5 @@
 window.addEventListener('load', function(){
     console.log("Loaded.");
-    
 });
 
 async function readNFC() {

@@ -18,11 +18,21 @@
         </div>
     </nav>
    <div class="container"> 
-        <div class="content__right">
-            <h2>Write NFC</h2>
-            <input type="text" id="nfc-input" placeholder="Enter text to write">
-            <button id="write" onclick="writeNFC()">Write NFC</button>
-        </div>
+            <div class="content__right">
+                <h2>Write NFC</h2>
+                <form id="nfc-form">
+                    <label for="firstname">Voornaam:</label>
+                    <input type="text" id="firstname" name="firstname" required>
+                    <br>
+                    <label for="lastname">Naam:</label>
+                    <input type="text" id="lastname" name="lastname" required>
+                    <br>
+                    <label for="phonenumber">Telefoonnummer:</label>
+                    <input type="tel" id="phonenumber" name="phonenumber" pattern="\+32 \d{3} \d{2} \d{2} \d{2}" placeholder="+32 xxx xx xx xx" required title="Geef een juist Telefoonnummer op!">
+                    <button type="button" onclick="combineData()">Combineer gegevens</button>
+                    <button type="button" onclick="writeNFC()">Verzend via NFC</button>
+                </form>
+            </div>
    </div>
    <footer>
         &COPY;Robin

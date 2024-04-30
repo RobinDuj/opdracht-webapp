@@ -75,3 +75,14 @@ footer{
     background-color: #333;
     line-height: 2em;
 }
+
+img{
+    width: 100%;
+    height: auto;
+}
+
+#homepage {
+    position: absolute;
+    background-color: black;
+    color: white;
+}
