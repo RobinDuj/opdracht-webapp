@@ -1,5 +1,36 @@
 window.addEventListener('load', function(){
     console.log("Loaded.");
+
+    this.document.querySelector("#btnGrantPermission").addEventListener("click", 
+    function(){
+        console.log("Button clicked...");
+
+        if(!("Notification" in window))
+            console.log("Notifications not supported in this browser.");
+        else
+        {
+            if(Notification.permission == "granted")
+            {
+                new Notification("Succesvol geschreven!");
+                console.log("Permission granted before. Notification send.");
+            }
+            else
+            {
+                if(Notification.permission != "denied")
+                {
+                    Notification.requestPermission().then(permission => {
+                        if(permission == "granted")
+                        {
+                            new Notification("Succesvol geschreven!");
+                            console.log("Permission granted. Notification send.");
+                        }
+                    });
+                }
+                else
+                    console.log("Permission denied before...");
+            }
+        }
+    });
 });
 
 async function readNFC() {
@@ -77,12 +108,29 @@ async function writeNFC() {
         const ndef = new NDEFReader();
         try {
             await ndef.write(combinedData);
-            alert("Succesvol geschreven!");
             console.log("Succesvol geschreven!");
+            showNotification("Succesvol geschreven!");
         } catch(error) {
             console.log(error);
         }
     } else {
         console.log("Web NFC is not supported.");
+    }
+}
+
+function showNotification(message) {
+    if (!("Notification" in window)) {
+        console.log("Notifications not supported in this browser.");
+        return;
+    }
+
+    if (Notification.permission === "granted") {
+        new Notification(message);
+    } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then(permission => {
+            if (permission === "granted") {
+                new Notification(message);
+            }
+        });
     }
 }
