@@ -1,6 +1,21 @@
 window.addEventListener('load', function(){
     console.log("Loaded.");
 
+    // Service worker registeren.
+    // if ('serviceWorker' in navigator) 
+    // {
+    //     navigator.serviceWorker.register('./service-worker.js')
+    //     .then((registration) => {
+    //         console.log('Registered: ');
+    //         console.log(registration);
+    //     })
+    //     .catch((err) => console.log(err));
+    // } 
+    // else
+    // {
+    //     alert('No service worker support in this browser.');
+    // }
+
     this.document.querySelector("#btnGrantPermission").addEventListener("click", 
     function(){
         console.log("Button clicked...");
