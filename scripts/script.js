@@ -82,17 +82,41 @@ function readTextRecord(record) {
     const info = {
         VoorNaam: parts[0],
         AchterNaam: parts[1],
-        TelefoonNummer: parts[2]
+        TelefoonNummer: parts[2],
+        GeboorteDatum: parts[3],
+        MoederTaal: parts[4],
+        Nationaliteit: parts[5],
+        Hoogte: parts[6],
+        Gewicht: parts[7],
+        Bloedgroep: parts[8],
+        Allergieen: parts[9],
+        AndereInfo: parts[10]
     };
 
-    console.log("First Name:", info.VoorNaam);
-    console.log("Last Name:", info.AchterNaam);
-    console.log("Phone Number:", info.TelefoonNummer);
+    console.log("Voornaam:", info.VoorNaam);
+    console.log("Achternaam:", info.AchterNaam);
+    console.log("Telefoonnummer:", info.TelefoonNummer);
+    console.log("Geboortedatum:", info.GeboorteDatum);
+    console.log("Moedertaal:", info.MoederTaal);
+    console.log("Nationaliteit:", info.Nationaliteit);
+    console.log("Hoogte:", info.Hoogte);
+    console.log("Gewicht:", info.Gewicht);
+    console.log("Bloedgroep:", info.Bloedgroep);
+    console.log("Allergieen:", info.Allergieen);
+    console.log("Andereinfo:", info.AndereInfo);
 
     document.getElementById('nfc-data').innerHTML = `
         <p>Voornaam: ${info.VoorNaam}</p>
         <p>Naam: ${info.AchterNaam}</p>
         <p>Telefoonnummer: ${info.TelefoonNummer}</p>
+        <p>Geboortedatum: ${info.GeboorteDatum}</p>
+        <p>Moedertaal: ${info.MoederTaal}</p>
+        <p>Nationaliteit: ${info.Nationaliteit}</p>
+        <p>Hoogte: ${info.Hoogte}</p>
+        <p>Gewicht: ${info.Gewicht}</p>
+        <p>Bloedgroep: ${info.Bloedgroep}</p>
+        <p>Allergieen: ${info.Allergieen}</p>
+        <p>Andere info: ${info.AndereInfo}</p>
     `;
 }
 
@@ -103,13 +127,22 @@ async function combineData() {
     const firstName = formData.get('firstname');
     const lastName = formData.get('lastname');
     const phoneNumber = formData.get('phonenumber');
+    const dateofbirth = formData.get('geboortedatum');
+    const mothertongue = formData.get('moedertaal');
+    const nationatlity = formData.get('nationaliteit');
+    const height = formData.get('hoogte');
+    const weight = formData.get('gewicht');
+    const bloodgroup = formData.get('bloedgroep');
+    const allergies = formData.get('allergieen');
+    const otherinfo = formData.get('andereinfo');
+
 
     if (!firstName || !lastName) {
         alert("Geef je voornaam en achternaam op!");
         return;
     }
 
-    const combinedData = `${firstName};${lastName};${phoneNumber}`.trim();
+    const combinedData = `${firstName};${lastName};${phoneNumber};${dateofbirth};${mothertongue};${nationatlity};${height};${weight};${bloodgroup};${allergies};${otherinfo}`.trim();
     console.log("Gecombineerde data:", combinedData);
     return combinedData;
 }

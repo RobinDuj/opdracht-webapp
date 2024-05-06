@@ -62,8 +62,57 @@
           <input type="text" class="form-control" id="lastname" name="lastname" required>
         </div>
         <div class="mb-3">
-          <label for="phonenumber" class="form-label">Telefoonnummer:</label>
+          <label for="phonenumber" class="form-label">Noodnummer:</label>
           <input type="tel" class="form-control" id="phonenumber" name="phonenumber" pattern="\+32 \d{3} \d{2} \d{2} \d{2}" placeholder="+32 xxx xx xx xx" required title="Geef een juist Telefoonnummer op!">
+        </div>
+        <div class="mb-3">
+          <label for="geboortedatum" class="form-label">Geboortedatum:</label>
+          <input type="date" class="form-control" id="geboortedatum" name="geboortedatum" required>
+        </div>
+        <div class="mb-3">
+          <label for="taal" class="form-label">Moedertaal:</label>
+          <input type="text" class="form-control" id="taal" name="taal" required>
+        </div>
+        <div class="mb-3">
+          <label for="nationaliteit" class="form-label">Nationaliteit:</label>
+          <select class="form-select" id="nationaliteit" name="nationaliteit" required>
+            <option value="">Kies een land</option>
+            <option value="België">België</option>
+            <option value="Nederland">Nederland</option>
+            <option value="Duitsland">Duitsland</option>
+            <option value="Luxemburg">Luxemburg</option>
+            <option value="Frankrijk">Frankrijk</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="hoogte" class="form-label">Hoogte:</label>
+          <input type="text" class="form-control" id="hoogte" name="hoogte" placeholder="xxx,x M">
+        </div>
+        <div class="mb-3">
+          <label for="gewicht" class="form-label">Gewicht:</label>
+          <input type="text" class="form-control" id="gewicht" name="gewicht" placeholder="xx,xx KG">
+        </div>
+        <div class="mb-3">
+          <label for="bloedgroep" class="form-label">Bloedgroep:</label>
+          <select class="form-select" id="bloedgroep" name="bloedgroep">
+            <option value="">Kies een bloedgroep</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="allergieen" class="form-label">Allergieën:</label>
+          <input type="text" class="form-control" id="allergieen" name="allergieen">
+        </div>
+        <div class="mb-3">
+          <label for="andereinfo" class="form-label">Andere info:</label>
+          <textarea class="form-control" id="andereinfo" name="andereinfo" rows="5"></textarea>
         </div>
         <button type="button" class="btn btn-primary" onclick="combineData()">Combineer gegevens</button>
         <button type="button" class="btn btn-primary" onclick="writeNFC()">Verzend via NFC</button>
