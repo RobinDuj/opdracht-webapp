@@ -16,6 +16,11 @@ window.addEventListener('load', function(){
     //     alert('No service worker support in this browser.');
     // }
 
+    var today = new Date().toISOString().split('T')[0];
+    var geboortedatumInput = document.getElementById('geboortedatum');
+    geboortedatumInput.setAttribute('max', today);
+
+
     this.document.querySelector("#btnGrantPermission").addEventListener("click", 
     function(){
         console.log("Button clicked...");
