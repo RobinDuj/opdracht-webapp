@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-  <head><script src="../assets/js/color-modes.js"></script>
+  <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,6 +18,7 @@
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <link href="styles/style.css" rel="stylesheet">
+    <script src="scripts/script.js"></script>
 
     <link href="carousel.css" rel="stylesheet">
   </head>
@@ -67,8 +68,8 @@
         </div>
         <div class="mb-3">
           <label for="geboortedatum" class="form-label">Geboortedatum:</label>
-          <input type="date" class="form-control" id="geboortedatum" name="geboortedatum" required>
-        </div>
+          <input type="date" class="form-control" id="geboortedatum" name="geboortedatum" max="<?php echo date('Y-m-d'); ?>" required>
+      </div>
         <div class="mb-3">
           <label for="taal" class="form-label">Moedertaal:</label>
           <input type="text" class="form-control" id="taal" name="taal" required>
@@ -86,7 +87,7 @@
         </div>
         <div class="mb-3">
           <label for="hoogte" class="form-label">Hoogte:</label>
-          <input type="text" class="form-control" id="hoogte" name="hoogte" placeholder="xxx,x M">
+          <input type="text" class="form-control" id="hoogte" name="hoogte" placeholder="xxx,x CM">S
         </div>
         <div class="mb-3">
           <label for="gewicht" class="form-label">Gewicht:</label>

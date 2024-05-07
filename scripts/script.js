@@ -99,8 +99,8 @@ function readTextRecord(record) {
     console.log("Geboortedatum:", info.GeboorteDatum);
     console.log("Moedertaal:", info.MoederTaal);
     console.log("Nationaliteit:", info.Nationaliteit);
-    console.log("Hoogte:", info.Hoogte);
-    console.log("Gewicht:", info.Gewicht);
+    console.log("Hoogte:", info.Hoogte, "CM");
+    console.log("Gewicht:", info.Gewicht, "KG");
     console.log("Bloedgroep:", info.Bloedgroep);
     console.log("Allergieen:", info.Allergieen);
     console.log("Andereinfo:", info.AndereInfo);
@@ -112,8 +112,8 @@ function readTextRecord(record) {
         <p>Geboortedatum: ${info.GeboorteDatum}</p>
         <p>Moedertaal: ${info.MoederTaal}</p>
         <p>Nationaliteit: ${info.Nationaliteit}</p>
-        <p>Hoogte: ${info.Hoogte}</p>
-        <p>Gewicht: ${info.Gewicht}</p>
+        <p>Hoogte: ${info.Hoogte}CM</p>
+        <p>Gewicht: ${info.Gewicht}KG</p>
         <p>Bloedgroep: ${info.Bloedgroep}</p>
         <p>Allergieen: ${info.Allergieen}</p>
         <p>Andere info: ${info.AndereInfo}</p>
@@ -127,14 +127,14 @@ async function combineData() {
     const firstName = formData.get('firstname');
     const lastName = formData.get('lastname');
     const phoneNumber = formData.get('phonenumber');
-    const dateofbirth = formData.get('geboortedatum');
-    const mothertongue = formData.get('moedertaal');
-    const nationatlity = formData.get('nationaliteit');
+    const dateOfBirth = formData.get('geboortedatum');
+    const motherTongue = formData.get('moedertaal');
+    const nationality = formData.get('nationaliteit');
     const height = formData.get('hoogte');
     const weight = formData.get('gewicht');
-    const bloodgroup = formData.get('bloedgroep');
+    const bloodGroup = formData.get('bloedgroep');
     const allergies = formData.get('allergieen');
-    const otherinfo = formData.get('andereinfo');
+    const otherInfo = formData.get('andereinfo');
 
 
     if (!firstName || !lastName) {
@@ -142,7 +142,7 @@ async function combineData() {
         return;
     }
 
-    const combinedData = `${firstName};${lastName};${phoneNumber};${dateofbirth};${mothertongue};${nationatlity};${height};${weight};${bloodgroup};${allergies};${otherinfo}`.trim();
+    const combinedData = `${firstName};${lastName};${phoneNumber};${dateOfBirth};${motherTongue};${nationality};${height};${weight};${bloodGroup};${allergies};${otherInfo}`.trim();
     console.log("Gecombineerde data:", combinedData);
     return combinedData;
 }

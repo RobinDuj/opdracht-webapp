@@ -89,6 +89,10 @@
     display: block !important;
   }
 
+  main {
+    margin-bottom: 60px; /* Hoogte van de footer */
+  }
+
   footer {
     background-color: #f5f5f5;
     padding: 10px;
