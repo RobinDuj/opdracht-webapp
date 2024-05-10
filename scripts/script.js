@@ -51,6 +51,89 @@ window.addEventListener('load', function(){
             }
         }
     });
+    
+
+    // Wanneer op de knop geklikt wordt, probeer notificaties te verwerken.
+    document.querySelector('#btnGrantPermission')        
+    .addEventListener('click', function() {
+
+        // Controleren of notifications mogelijk zijn in de huidige browser.
+        if (!("Notification" in window))
+            console.log("Notifications are not supported in this browser.");
+        else
+        {
+            // Bekijken of er reeds toestemming gegeven werd.
+            if(Notification.permission == "granted")
+            {
+                console.log("Permission granted before.");
+            }
+            else
+                if(Notification.permission !== "denied")
+                {
+                    // Als niet eerder geweigerd werd, vraag het aan...
+                    Notification.requestPermission()
+                    .then(permission => {
+                        if(permission === "granted")
+                        {
+                            console.log("Permission granted.");
+                        }
+                    });
+                }    
+                else
+                {
+                    console.log("Permission denied befor. No notifications will be send.");
+                }
+        }
+    });
+
+    document.querySelector("#btnSubscribeToPushNotification")
+    .addEventListener('click', function(){
+        console.log("Clicked to subscribe.");
+
+        // Registratieobject van de service worker ophalen. Daarop via de
+        // push manager subscriben.
+        navigator.serviceWorker.getRegistration()
+        .then(registration => {
+            // Zie: https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/pushManager
+            // en https://developer.mozilla.org/en-US/docs/Web/API/PushManager/subscribe.
+            registration.pushManager.subscribe(
+                {
+                    // userVisibleOnly moet op true staan. De false optie is (nog) niet geïmplementeerd.
+                    userVisibleOnly: true,
+                    applicationServerKey: "BOlSKki71ihxD2V0ve2dfIu2CKwsOLhH-H3obGOOXgeBDaLFzktArO2YPHYwkWPp6vupHKHv76mtAuqbBZxsytg"
+                }
+            )
+            .then(subscription => {
+                // In het subscription object zit het endpoint waarnaar je een bericht kan sturen.
+                // Dat bericht wordt dat gepushed naar hier...
+                // OPM: de browser kiest zelf de 'push service'... Daarom moet alle inhoud versleuteld zijn.
+
+                console.log("Subscription: ");
+                console.log(JSON.stringify(subscription));      // OPM: I.p.v. stringify, kan je ook zelf de data ophalen uit het subscription object.
+                    
+                    
+                // Dit moet naar de server verzonden worden....(via fetch request).
+                // Bekijk van bovenstaande object de property 'endpoint', 'keys', ...
+                // Ga naar het eigen back-end end point waar de Express server luistert naar
+                // POST info (api/save-subscription) en geef info mee.
+                var options =   {
+                                    method: "POST",
+                                    headers: { "Content-type": "application/json"},
+                                    body: JSON.stringify(subscription)
+                                };
+                fetch("api/save-subscription", options)
+                .then(response => {
+                    console.log("Response: ", response)
+                    return response.json();
+                })
+                .then(response => {
+                    console.log(response)
+                })
+                .catch(error => console.log("Error: ", error));                    
+            })
+            .catch(error => console.log(error));
+        });
+    });
 });
 
 async function readNFC() {
@@ -187,112 +270,3 @@ function showNotification(message) {
         });
     }
 }
-
-//push notifications
-window.addEventListener('load', function(){
-    // Wanneer op de knop geklikt wordt, probeer notificaties te verwerken.
-    document.querySelector('#btnGrantPermission')        
-        .addEventListener('click', function() {
-
-            // Controleren of notifications mogelijk zijn in de huidige browser.
-            if (!("Notification" in window))
-                console.log("Notifications are not supported in this browser.");
-            else
-            {
-                // Bekijken of er reeds toestemming gegeven werd.
-                if(Notification.permission == "granted")
-                {
-                    console.log("Permission granted before.");
-                }
-                else
-                    if(Notification.permission !== "denied")
-                    {
-                        // Als niet eerder geweigerd werd, vraag het aan...
-                        Notification.requestPermission()
-                        .then(permission => {
-                            if(permission === "granted")
-                            {
-                                console.log("Permission granted.");
-                            }
-                        });
-                    }    
-                    else
-                    {
-                        console.log("Permission denied befor. No notifications will be send.");
-                    }
-            }
-      });
-
-      document.querySelector("#btnSubscribeToPushNotification")
-        .addEventListener('click', function(){
-            console.log("Clicked to subscribe.");
-
-            // Registratieobject van de service worker ophalen. Daarop via de
-            // push manager subscriben.
-            navigator.serviceWorker.getRegistration()
-            .then(registration => {
-                // Zie: https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/pushManager
-                // en https://developer.mozilla.org/en-US/docs/Web/API/PushManager/subscribe.
-                registration.pushManager.subscribe(
-                    {
-                        // userVisibleOnly moet op true staan. De false optie is (nog) niet geïmplementeerd.
-                        userVisibleOnly: true,
-                        applicationServerKey: "BOlSKki71ihxD2V0ve2dfIu2CKwsOLhH-H3obGOOXgeBDaLFzktArO2YPHYwkWPp6vupHKHv76mtAuqbBZxsytg"
-                    }
-                )
-                .then(subscription => {
-                    // In het subscription object zit het endpoint waarnaar je een bericht kan sturen.
-                    // Dat bericht wordt dat gepushed naar hier...
-                    // OPM: de browser kiest zelf de 'push service'... Daarom moet alle inhoud versleuteld zijn.
-
-                    console.log("Subscription: ");
-                    console.log(JSON.stringify(subscription));      // OPM: I.p.v. stringify, kan je ook zelf de data ophalen uit het subscription object.
-                    
-                    
-                    // Dit moet naar de server verzonden worden....(via fetch request).
-                    // Bekijk van bovenstaande object de property 'endpoint', 'keys', ...
-                    // Ga naar het eigen back-end end point waar de Express server luistert naar
-                    // POST info (api/save-subscription) en geef info mee.
-                    var options =   {
-                                        method: "POST",
-                                        headers: { "Content-type": "application/json"},
-                                        body: JSON.stringify(subscription)
-                                    };
-                    fetch("api/save-subscription", options)
-                    .then(response => {
-                        console.log("Response: ", response)
-                        return response.json();
-                    })
-                    .then(response => {
-                        console.log(response)
-                    })
-                    .catch(error => console.log("Error: ", error));                    
-                })
-                .catch(error => console.log(error));
-            });
-        });
-});
-
-window.addEventListener('load', function(){
-    // Functie om een pushmelding te verzenden
-    function sendPushNotification() {
-        const myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-        const options = {
-            method: "POST",
-            headers: myHeaders,
-            body: JSON.stringify({message: "Vergeet niet om regelmatig je data up te daten!"})
-        };
-
-        fetch("/api/trigger-push-message/", options)
-            .then(response => {
-                console.log("Push notification sent successfully!");
-            })
-            .catch(error => {
-                console.error("Error sending push notification:", error);
-            });
-    }
-
-    // Verzend een pushmelding om de 5 minuten
-    setInterval(sendPushNotification, 1 * 60 * 1000);
-});
