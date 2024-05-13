@@ -52,6 +52,10 @@ function showOfflineLandingPage(event) {
 }
 
 function pullFromCache(event) {
+    if (event.request.method !== 'GET') {
+        return fetch(event.request);
+    }
+
     return caches.match(event.request)
     .then((response) => {
         return response || fetch(event.request)

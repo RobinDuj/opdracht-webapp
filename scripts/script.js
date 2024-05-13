@@ -3,18 +3,18 @@ window.addEventListener('load', function(){
 
     //Service worker registeren.
     if ('serviceWorker' in navigator) 
-        {
-             navigator.serviceWorker.register('./service-worker.js')
-             .then((registration) => {
-                 console.log('Registered: ');
-                 console.log(registration);
-             })
-             .catch((err) => console.log(err));
-        } 
-        else
-        {
-             alert('No service worker support in this browser.');
-        }
+    {
+        navigator.serviceWorker.register('./service-worker.js')
+        .then((registration) => {
+            console.log('Registered: ');
+            console.log(registration);
+        })
+            .catch((err) => console.log(err));
+    } 
+    else
+    {
+        alert('No service worker support in this browser.');
+    }
 
     var today = new Date().toISOString().split('T')[0];
     var geboortedatumInput = document.getElementById('geboortedatum');
@@ -254,19 +254,37 @@ async function writeNFC() {
     }
 }
 
-function showNotification(message) {
-    if (!("Notification" in window)) {
-        console.log("Notifications not supported in this browser.");
+async function showNotification(message) {
+    if (!("ServiceWorkerRegistration" in window)) {
+        console.log("ServiceWorkerRegistration not supported in this browser.");
+        return;
+    }
+
+    if (!("serviceWorker" in navigator)) {
+        console.log("Service worker not supported in this browser.");
+        return;
+    }
+
+    const registration = await navigator.serviceWorker.getRegistration();
+    if (!registration) {
+        console.log("Service worker registration not found.");
         return;
     }
 
     if (Notification.permission === "granted") {
-        new Notification(message);
+        registration.showNotification(message);
     } else if (Notification.permission !== "denied") {
-        Notification.requestPermission().then(permission => {
+        try {
+            const permission = await Notification.requestPermission();
             if (permission === "granted") {
-                new Notification(message);
+                registration.showNotification(message);
+            } else {
+                console.log("Notification permission denied by user.");
             }
-        });
+        } catch (error) {
+            console.error("Error requesting notification permission:", error);
+        }
+    } else {
+        console.log("Notification permission denied by user.");
     }
 }

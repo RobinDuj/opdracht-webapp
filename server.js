@@ -17,7 +17,7 @@ webpush.setVapidDetails(
 );
 
 // De bestanden uit de 'public' map beschikbaar stellen.
-app.use(express.static('public'));
+app.use(express.static('PROJECT NFC'));
 
 app.use(express.json());
 
